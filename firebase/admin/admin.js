@@ -1,5 +1,5 @@
 module.exports = function(admin) {
-    let serviceAccount = require("./admin.js");
+    let serviceAccount = require("./config.js");
   
     let adminApp = admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
