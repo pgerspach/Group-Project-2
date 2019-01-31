@@ -21,6 +21,9 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
+//Firebase
+const Firebase = require("./firebase/firebase.js");
+
 // Routes
 require("./routes/apiRoutes")(app);     
     require("./routes/htmlRoutes")(app);
