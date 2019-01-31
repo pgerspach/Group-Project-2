@@ -10,7 +10,6 @@ var PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static("public"));
 
 // Handlebars
 app.engine(
@@ -20,6 +19,7 @@ app.engine(
   })
 );
 app.set("view engine", "handlebars");
+app.use(express.static("public"));
 
 //Firebase
 const Firebase = require("./firebase/firebase.js");
@@ -27,6 +27,8 @@ const Firebase = require("./firebase/firebase.js");
 // Routes
 require("./routes/apiRoutes")(app, Firebase);
     require("./routes/htmlRoutes")(app);
+    require("./routes/authRoutes")(app, Firebase);
+
 
 var syncOptions = { force: false };
 

@@ -4,6 +4,7 @@ module.exports = {
         // get user credential from token provided by client
         token
       );
+      console.log(credential);
       return new Promise((resolve, reject) => {
         firebase
           .app()
@@ -16,6 +17,7 @@ module.exports = {
             });
           })
           .catch(function(error) {
+            console.log("Here in sign in failed");
             resolve({
               statusCode: 404,
               data: error

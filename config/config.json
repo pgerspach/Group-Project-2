@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "password2727",
     "database": "well_db",
     "host": "localhost",
     "dialect": "mysql"
