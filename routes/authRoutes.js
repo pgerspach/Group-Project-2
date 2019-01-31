@@ -1,7 +1,7 @@
 module.exports = function(app, Firebase) {
   const fborm = require("../firebase/orm/orm.js");
   app.post("/auth/google", (req, res) => {
-    console.log("Here");
+    console.log("Here in auth/google post request");
 
     Firebase.firebaseMain.auth().onAuthStateChanged(function(user) {
       // Listen for change in auth status...
@@ -33,4 +33,42 @@ module.exports = function(app, Firebase) {
         });
     });
   });
+
+  app.post("/auth/email", (req,res)=>{
+    console.log("Here in auth/email post request");
+    Firebase.firebaseMain.auth().signInWithEmailAndPassword(req.body.email, req.body.password).then(()=>{
+      Firebase.firebaseMain.auth().signOut().then(function() {
+        console.log("Sign out successful");
+        // Sign-out successful.
+        res.send("Sign out successful");
+      }).catch(function(error) {
+        console.log(error);
+        res.sendStatus(404);
+      });
+    }).catch(function(error) {
+      if(error.code === "auth/user-not-found"){
+        Firebase.firebaseMain.auth().createUserWithEmailAndPassword(req.body.email, req.body.password).then((createUserResult)=>{
+          res.send("user created!" +createUserResult);
+          Firebase.firebaseMain.auth().signOut().then(function() {
+            console.log("Sign out successful");
+            // Sign-out successful.
+          }).catch(function(error) {
+            console.log(error);
+            res.sendStatus(404);
+          });
+        }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });
+      }else if(error.code === "auth/invalid-email"){
+        res.send("email must be in proper format");
+      }
+       //var errorCode = error.code;
+      //var errorMessage = error.message;
+      // ...
+    });
+
+  })
 };
