@@ -21,9 +21,12 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
+//Firebase
+const Firebase = require("./firebase/firebase.js");
+
 // Routes
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+require("./routes/apiRoutes")(app);     
+    require("./routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };
 
@@ -35,9 +38,9 @@ if (process.env.NODE_ENV === "test") {
 
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function() {
-  app.listen(PORT, function() {
+                     app.listen(PORT, function() {
     console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+      '==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.',
       PORT,
       PORT
     );

@@ -19,3 +19,10 @@
   margin-bottom: 10px;
 
 }
+
+
+.item {
+  float: left;
+
+  margin: 10px;
+}
