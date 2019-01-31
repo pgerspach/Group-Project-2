@@ -1,5 +1,23 @@
-.list-group-item {
-  line-height: 2.5;
+#main-modal{
+  
+  margin-left: 150px;
+  padding-top: 50px;
+
+}
+
+
+.item {
+  float: left;
+
+  margin: 10px;
+
+}
+
+#logButt {
+
+  width: 150px;
+  margin-bottom: 10px;
+
 }
 
 
