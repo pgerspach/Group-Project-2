@@ -4,6 +4,6 @@ const admin = require("./admin/admin.js")(firebase_admin);
 
 firebase.initializeApp(require("./config.js"));
 
-const Firebase = {firebase_main:firebase,admin:admin};
+const Firebase = {firebaseMain:firebase,admin:admin};
 
 module.exports = Firebase;
