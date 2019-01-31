@@ -25,7 +25,7 @@ app.set("view engine", "handlebars");
 const Firebase = require("./firebase/firebase.js");
 
 // Routes
-require("./routes/apiRoutes")(app);     
+require("./routes/apiRoutes")(app, Firebase);
     require("./routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };
