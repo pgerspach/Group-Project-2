@@ -13,14 +13,6 @@
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-
-
-<meta name="google-signin-client_id" content="614270118357-k2hfb77oft1qsl25tdthuvl33bt3i1a5.apps.googleusercontent.com">
-<meta name="google-signin-cookiepolicy" content="single_host_origin">
-<meta name="google-signin-scope" content="profile email">
-<meta name="google-signin-client_id"content="614270118357-k2hfb77oft1qsl25tdthuvl33bt3i1a5.apps.googleusercontent.com"><meta name="google-signin-cookiepolicy"content="single_host_origin"><meta name="google-signin-scope" content="profile email">        
-
-
     <title>uWell</title>
 </head>
 <body>
@@ -42,42 +34,40 @@
                         </li>
                     </ul>
                     </div>
+
+                    <form class="form-inline my-2 my-lg-0" id="searchBar">
+                        <input class="form-control mr-sm-2" type="search"  aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </nav>
 
-    <div id ="main-modal">
-    <div class ="modal-dialog text-center">
-        <div class ="col-sm-8 main-section">
-            <div class = "modal-content">
-                <div class = "col-12 user-img">
-                    <img src = "./styles/images/rsz_user_avatar_2.png">
-                </div>
-                <div class ="col-12 user-name">
-                    <h1>uWell</h1>
-                </div>
-                <div class = "col-12 form-input">
-                    <form>
-                        <div class ="form-group">
-                            <input type ="name" class = "form-control" placeholder ="Username">
-                        </div>
-                        <div class ="form-group">
-                            <input type ="password" class = "form-control" placeholder ="Password">
-                        </div>
-                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                    </form>
-                </div>
-                <div class ="col-12 link-part">
-                    <a href="#">Forgot Password?</a>
-                </div>
-            </div>
+<div id ="activiFeed">
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1" id="activiTitle">Activity Title</h5>
+            <small>3 days ago</small>
         </div>
-        </div>  
+        <p class="mb-1">Worked on group project.</p>
+        </a>
+        <a class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1" id="activiTitle">Activity Title</h5>
+            <small>5 days ago</small>
+        </div>
+        <p class="mb-1">Woke early for gym.</p>
+        
+        </a>
+        <a class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1" id="activiTitle">Activity Title</h5>
+            <small>2 days ago</small>
+        </div>
+        <p class="mb-1">Ate veggies.</p>
+        </a>
     </div>
 
 
-    
-
-
-
-
+</div>
 </body>
 </html>
