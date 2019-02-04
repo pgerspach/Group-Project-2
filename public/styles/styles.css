@@ -1,10 +1,12 @@
-html, body {
+html, body, #main-container {
 
   max-height: 100%;
   max-width: 100%;
-
+  background-color: silver;
+  
 }
 
+/* main modal on login page */
 #main-modal{
   
   margin-left: 150px;
@@ -34,12 +36,4 @@ html, body {
   margin: 10px;
 }
 
-#activiFeed {
 
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding-top: 125px;
-  
-
-}
