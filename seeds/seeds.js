@@ -1,5 +1,5 @@
 const faker = require("faker");
-const db = require("./models");
+const db = require("../models");
 
 const numUsers = 20;
 const numEfforts = 5;
@@ -36,9 +36,9 @@ module.exports = function() {
   function createEfforts(data, numUsersLeft, numEffortsLeft) {
     db.efforts
       .create({
-        usersId: data[numUsersLeft - 1].id,
+        userId: data[numUsersLeft - 1].id,
         header: faker.lorem.sentence(),
-        description: faker.lorem.paragraph(),
+        description: faker.lorem.sentence(),
         supports: faker.random.number(0, 15),
         category: "General Wellness"
       })

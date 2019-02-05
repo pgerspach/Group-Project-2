@@ -1,3 +1,5 @@
+const db = require("../../models");
+
 module.exports = {
   signInGoogle: function(firebase, token) {
     var credential = firebase.auth.GoogleAuthProvider.credential(
@@ -81,5 +83,16 @@ module.exports = {
   },
   currentUser: function(firebase) {
     return firebase.auth().currentUser;
+  },
+  addUserToMySQL:function(userInfo){
+    return new Promise((resolve, reject)=>{
+      db.users.create({
+        id:userInfo.id,
+        firstName:userInfo.firstName,
+        lastName:userInfo.lastName,
+        proPic:userInfo.proPic,
+        coverPic:userInfo.coverPic
+      })
+    })
   }
 };

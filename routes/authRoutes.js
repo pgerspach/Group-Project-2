@@ -1,5 +1,6 @@
 module.exports = function(app, Firebase) {
   const fborm = require("../firebase/orm/orm.js");
+  const db = require("../models");
   Firebase.firebaseMain.auth().onAuthStateChanged(function(user) {
     // Listen for change in auth status...
     if (user) {
@@ -10,7 +11,7 @@ module.exports = function(app, Firebase) {
       console.log("User Not");
     }
   });
-  
+
   app.post("/auth/google", (req, res) => {
     console.log("Here in auth/google post request");
     fborm
@@ -20,15 +21,52 @@ module.exports = function(app, Firebase) {
         let userId = fborm.currentUser(Firebase.firebaseMain).uid;
         console.log(userId);
 
-        fborm
-          .signOutAccount(Firebase.firebaseMain, req)
-          .then(result => {
-            Firebase.firebaseMain = result.firebase;
-            console.log("Sign-out successful!");
-            res.send("Success");
+        db.users
+          .findAll({
+            where: {
+              id: userId
+            }
           })
-          .catch(result => {
-            res.status(result.statusCode).send(result.errorCode);
+          .then(result => {
+            if (result.length < 1) {
+              console.log("user id: "+userId);
+              let userInfo = {
+                id: userId,
+                firstName: fborm
+                  .currentUser(Firebase.firebaseMain)
+                  .displayName.split(" ")[0],
+                lastName:
+                  fborm
+                    .currentUser(Firebase.firebaseMain)
+                    .displayName.split(" ")[1] || null,
+                proPic:
+                  fborm.currentUser(Firebase.firebaseMain).photoURL || null,
+                coverPic: null
+              };
+              fborm.addUserToMySQL(userInfo).then(() => {
+                fborm
+                  .signOutAccount(Firebase.firebaseMain, req)
+                  .then(result => {
+                    Firebase.firebaseMain = result.firebase;
+                    console.log("Sign-out successful!");
+                    res.send("Success");
+                  })
+                  .catch(result => {
+                    res.status(result.statusCode).send(result.errorCode);
+                  });
+              });
+            } else {
+              fborm
+                .signOutAccount(Firebase.firebaseMain, req)
+                .then(result => {
+                  Firebase.firebaseMain = result.firebase;
+                  console.log("Sign-out successful!");
+                  res.send("Success");
+                })
+                .catch(result => {
+                  res.status(result.statusCode).send(result.errorCode);
+                });
+            }
           });
       })
       .catch(result => {
