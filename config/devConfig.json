@@ -1,7 +1,0 @@
-{
-    "username": "root",
-    "password": "254232218",
-    "database": "well_db",
-    "host": "localhost",
-    "dialect": "mysql"
-  }
