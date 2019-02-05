@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>    
+<body>
+
+    <div class="container">
+
+        <form id="newPostForm">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Headline</label>
+                <input class="form-control" id="headlineInput" placeholder="">
+            </div>
+
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea class="form-control" id="descriptionInput" rows="3"></textarea>
+            </div>        
+
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect2">Categories</label>
+                <select multiple class="form-control" id="categoriesInput">
+                    <option>Body</option>
+                    <option>Charity</option>
+                    <option>Culture</option>
+                    <option>Education</option>
+                    <option>Friendship</option>
+                    <option>Spirit</option>
+                    <option>Volunteering</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+
+    </div>
+
+    <script type="text/javascript">
+
+        $("#newPostForm").on("submit", function() {
+            event.preventDefault();
+
+            //validation; check for length of fields
+            var newHeadline = $("#headlineInput").val().trim();
+            var newDescription = $("#descriptionInput").val().trim();
+            //the value for a <select> with the multiple attribute is an array
+            var newCategories = $("#categoriesInput").val();            
+
+            if (newHeadline === "") {
+                alert("Please enter a headline; this cannot be blank!");
+                $("#headlineInput").val("");
+                $("#headlineInput").focus();
+            } else if (newHeadline.length > 40) {
+                alert("That headline is too long! Please shorten it.");
+                $("#headlineInput").focus();
+            } else if (newDescription === "") {
+                alert("Say something for the description!");
+                $("#descriptionInput").val("");
+                $("#descriptionInput").focus();
+            } else if (newDescription.length > 140) {
+                alert("That description is too long! Please shorten it.");
+                $("#descriptionInput").focus();
+            } else {
+                //all input validations are cleared
+                //perform a post request
+
+                var newPostObj = {
+                    header: newHeadline,
+                    description: newDescription,
+                    category: newCategories
+                }
+
+                // need to confirm the route
+                $.post("", newPostObj).then(function(data) {
+                    //consider turning this into a modal
+                    alert("Thanks for sharing!");
+                })
+            }
+
+        })
+    
+    </script>
+
+</body>
+</html>
