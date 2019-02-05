@@ -10,10 +10,10 @@ module.exports = function(app, Firebase) {
   });
 
   function fetchHomeData(req, res) {
-    if (fborm.currentUser(Firebase.firebase) === null) {
+    if (fborm.currentUser(Firebase.firebaseMain) === null) {
       res.render("login", {});
     } else {
-      let currentUserId = fborm.currentUser(Firebase.firebase).uid;
+      let currentUserId = fborm.currentUser(Firebase.firebaseMain).uid;
       db.friendships
         .findAll({
           where: {
@@ -52,7 +52,7 @@ module.exports = function(app, Firebase) {
             .then(data => {
               res.render("home", {
                 efforts: data,
-                proPic: fborm.currentUser(Firebase.firebase).photoURL
+                proPic: fborm.currentUser(Firebase.firebaseMain).photoURL
               });
             })
             .catch(err => {

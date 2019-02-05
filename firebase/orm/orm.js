@@ -92,6 +92,8 @@ module.exports = {
         lastName:userInfo.lastName,
         proPic:userInfo.proPic,
         coverPic:userInfo.coverPic
+      }).then(()=>{
+        resolve();
       })
     })
   }
