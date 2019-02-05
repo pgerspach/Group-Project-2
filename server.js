@@ -26,11 +26,10 @@ const Firebase = require("./firebase/firebase.js");
 
 // Routes
 require("./routes/apiRoutes")(app, Firebase);
-    require("./routes/htmlRoutes")(app, Firebase);
-    require("./routes/authRoutes")(app, Firebase);
+require("./routes/htmlRoutes")(app, Firebase);
+require("./routes/authRoutes")(app, Firebase);
 
-
-var syncOptions = { force: false };
+var syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
@@ -39,11 +38,12 @@ if (process.env.NODE_ENV === "test") {
 }
 
 // Starting the server, syncing our models ------------------------------------/
-require("./seeds")();
 db.sequelize.sync(syncOptions).then(function() {
-                     app.listen(PORT, function() {
+  app.listen(PORT, function() {
+    require("./seeds/seeds.js")();
+
     console.log(
-      '==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.',
+      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,
       PORT
     );
