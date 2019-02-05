@@ -4,8 +4,8 @@ let docReadyPromise = new Promise((resolve, reject) => {
       $.post("/auth/google", { token: token }, response => {
         console.log("Response from google sign in");
 
-        if (response === "OK") {
-          window.location.href = "/";
+        if(response === "Success"){
+          sendHome();
         }
       });
       $("#logButt").click(event => {
@@ -16,6 +16,9 @@ let docReadyPromise = new Promise((resolve, reject) => {
           password: $("#login-password").val()
         }, response=>{
             console.log("Response from email sign in: "+response);
+            if(response === "Success"){
+              sendHome();
+            }
         });
 
         $("#login-email").val("");
@@ -32,4 +35,7 @@ function onSignIn(googleUser) {
   docReadyPromise.then(signIn => {
     signIn(token);
   });
+}
+function sendHome(){
+  window.location.href = "/home";
 }
