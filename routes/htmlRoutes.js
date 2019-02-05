@@ -1,24 +1,64 @@
 var db = require("../models");
-
-module.exports = function(app) {
+var fborm = require("../firebase/orm/orm.js");
+module.exports = function(app, Firebase) {
   // Load index page
   app.get("/", function(req, res) {
     res.render("login");
   });
+  app.get("/home", function(req, res) {
+    fetchHomeData(req, res);
+  });
 
-  // Load example page and pass in an example by id
-  // app.get("/example/:id", function(req, res) {
-  //   db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-  //     res.render("example", {
-  //       example: dbExample
-  //     });
-  //   });
-  // });
-
-  // // Render 404 page for any unmatched routes
-  // app.get("*", function(req, res) {
-  //   res.render("404");
-  // });
-
-  
+  function fetchHomeData(req, res) {
+    if (fborm.currentUser(Firebase.firebase) === null) {
+      res.render("login", {});
+    } else {
+      let currentUserId = fborm.currentUser(Firebase.firebase).uid;
+      db.friendships
+        .findAll({
+          where: {
+            $or: [
+              {
+                uuid_1: {
+                  $eq: currentUserId
+                }
+              },
+              {
+                uuid_2: {
+                  $eq: currentUserId
+                }
+              }
+            ]
+          }
+        })
+        .then(result => {
+          let friends = [];
+          if (result.length !== 0) {
+            for (let friend of result) {
+              if (friend.uuid_1 === currentUserId) {
+                friends.push({ UserId: { $eq: friend.uuid_2 } });
+              } else {
+                friends.push({ UserId: { $eq: friend.uuid_1 } });
+              }
+            }
+          }
+          console.log(friends);
+          db.efforts
+            .findAll({
+              where: {
+                $or: friends
+              }
+            })
+            .then(data => {
+              res.render("home", {
+                efforts: data,
+                proPic: fborm.currentUser(Firebase.firebase).photoURL
+              });
+            })
+            .catch(err => {
+              throw err;
+            });
+        });
+    }
+  }
 };

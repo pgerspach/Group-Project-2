@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey:true,
         unique:true
       },
-      name: DataTypes.STRING,
+      firstName: DataTypes.STRING,
+      lastName:DataTypes.STRING,
       proPic:{
         type:DataTypes.STRING
       },

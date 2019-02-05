@@ -26,7 +26,7 @@ const Firebase = require("./firebase/firebase.js");
 
 // Routes
 require("./routes/apiRoutes")(app, Firebase);
-    require("./routes/htmlRoutes")(app);
+    require("./routes/htmlRoutes")(app, Firebase);
     require("./routes/authRoutes")(app, Firebase);
 
 
@@ -39,6 +39,7 @@ if (process.env.NODE_ENV === "test") {
 }
 
 // Starting the server, syncing our models ------------------------------------/
+require("./seeds")();
 db.sequelize.sync(syncOptions).then(function() {
                      app.listen(PORT, function() {
     console.log(
