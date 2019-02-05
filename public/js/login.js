@@ -2,7 +2,7 @@ let docReadyPromise = new Promise((resolve, reject) => {
   $(document).ready(() => {
     resolve(token => {
       $.post("/auth/google", { token: token }, response => {
-        console.log("Response from google sign in");
+        console.log("Response from google sign in" + response);
 
         if(response === "Success"){
           sendHome();

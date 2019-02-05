@@ -29,7 +29,7 @@ module.exports = function(app, Firebase) {
           })
           .then(result => {
             if (result.length < 1) {
-              console.log("user id: "+userId);
+              console.log("user id: " + userId);
               let userInfo = {
                 id: userId,
                 firstName: fborm
@@ -44,34 +44,19 @@ module.exports = function(app, Firebase) {
                 coverPic: null
               };
               fborm.addUserToMySQL(userInfo).then(() => {
-                fborm
-                  .signOutAccount(Firebase.firebaseMain, req)
-                  .then(result => {
-                    Firebase.firebaseMain = result.firebase;
-                    console.log("Sign-out successful!");
-                    res.send("Success");
-                  })
-                  .catch(result => {
-                    res.status(result.statusCode).send(result.errorCode);
-                  });
+                console.log("here in successful addition to sql");
+                res.send("Success");
               });
             } else {
-              fborm
-                .signOutAccount(Firebase.firebaseMain, req)
-                .then(result => {
-                  Firebase.firebaseMain = result.firebase;
-                  console.log("Sign-out successful!");
-                  res.send("Success");
-                })
-                .catch(result => {
-                  res.status(result.statusCode).send(result.errorCode);
-                });
+              res.send("Success");
             }
           });
       })
       .catch(result => {
         res.status(result.statusCode).send(result.errorCode);
       });
+
+      
   });
 
   app.post("/auth/email", (req, res) => {
@@ -83,16 +68,7 @@ module.exports = function(app, Firebase) {
         Firebase.firebaseMain = result.firebase;
         let userId = fborm.currentUser(Firebase.firebaseMain).uid;
         console.log(userId);
-        fborm
-          .signOutAccount(Firebase.firebaseMain, req)
-          .then(result => {
-            Firebase.firebaseMain = result.firebase;
-            console.log("Sign-out successful!");
-            res.send("Success");
-          })
-          .catch(result => {
-            res.status(result.statusCode).send(result.errorCode);
-          });
+        res.send("Success");
       })
       .catch(result => {
         res.status(result.statusCode).send(result.errorCode);
@@ -108,16 +84,7 @@ module.exports = function(app, Firebase) {
         console.log(userId);
         res.send("user created!");
         console.log(req);
-        fborm
-          .signOutAccount(Firebase.firebaseMain, req)
-          .then(result => {
-            Firebase.firebaseMain = result.firebase;
-            console.log("Sign-out successful!");
-            res.send("Success");
-          })
-          .catch(result => {
-            res.status(result.statusCode).send(result.errorCode);
-          });
+        res.send("Success");
       })
       .catch(result => {
         res.status(result.statusCode).send(result.errorCode);
