@@ -14,7 +14,7 @@ html, body, #main-container {
 
 }
 
-#signupButt {
+#signupButt .g-signin2 {
 
   padding-top: 5px;
   justify-content: center;
