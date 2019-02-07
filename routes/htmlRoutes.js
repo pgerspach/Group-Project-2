@@ -8,6 +8,9 @@ module.exports = function(app, Firebase) {
   app.get("/home", function(req, res) {
     fetchHomeData(req, res);
   });
+  app.get("/profile", function(req, res) {
+    fetchUserData(req, res);
+  });
 
   function fetchHomeData(req, res) {
     if (fborm.currentUser(Firebase.firebaseMain) === null) {
@@ -58,6 +61,30 @@ module.exports = function(app, Firebase) {
             .catch(err => {
               throw err;
             });
+        });
+    }
+  }
+
+  function fetchUserData(req, res) {
+    if (fborm.currentUser(Firebase.firebaseMain) === null) {
+      res.render("login");
+    } else {
+      let currentUserId = fborm.currentUser(Firebase.firebaseMain).uid;
+
+      db.efforts
+        .findAll({
+          where: {
+            usersId: currentUserId
+          }
+        })
+        .then(data => {
+          res.render("profile", {
+            efforts: data,
+            proPic: fborm.currentUser(Firebase.firebaseMain).photoURL
+          });
+        })
+        .catch(err => {
+          throw err;
         });
     }
   }

@@ -55,39 +55,68 @@ module.exports = function(app, Firebase) {
       .catch(result => {
         res.status(result.statusCode).send(result.errorCode);
       });
-
-      
   });
 
   app.post("/auth/email", (req, res) => {
     console.log("Here in auth/email post request");
     //fborm.signInEmail(Firebase.firebaseMain)...
-    fborm
-      .signInEmail(Firebase.firebaseMain, req)
-      .then(result => {
-        Firebase.firebaseMain = result.firebase;
-        let userId = fborm.currentUser(Firebase.firebaseMain).uid;
-        console.log(userId);
-        res.send("Success");
-      })
-      .catch(result => {
-        res.status(result.statusCode).send(result.errorCode);
+    if (fborm.currentUser(Firebase.firebaseMain)) {
+      fborm.signOutAccount(Firebase.firebaseMain).then(() => {
+        fborm
+          .signInEmail(Firebase.firebaseMain, req)
+          .then(result => {
+            Firebase.firebaseMain = result.firebase;
+            let userId = fborm.currentUser(Firebase.firebaseMain).uid;
+            res.send("Success");
+          })
+          .catch(result => {
+            if (result.errorCode == "auth/user-not-found") {
+              res.send("Create user");
+            } else {
+              res.status(result.statusCode).send(result.errorCode);
+            }
+          });
       });
+    } else {
+      fborm
+        .signInEmail(Firebase.firebaseMain, req)
+        .then(result => {
+          Firebase.firebaseMain = result.firebase;
+          let userId = fborm.currentUser(Firebase.firebaseMain).uid;
+          res.send("Success");
+        })
+        .catch(result => {
+          res.status(result.statusCode).send(result.errorCode);
+        });
+    }
   });
 
   app.post("/auth/email/create", (req, res) => {
-    fborm
-      .signUpEmail(Firebase.firebaseMain, req)
-      .then(result => {
-        Firebase.firebaseMain = result.firebase;
-        let userId = fborm.currentUser(Firebase.firebaseMain).uid;
-        console.log(userId);
-        res.send("user created!");
-        console.log(req);
-        res.send("Success");
-      })
-      .catch(result => {
-        res.status(result.statusCode).send(result.errorCode);
+
+    if (fborm.currentUser(Firebase.firebaseMain)) {
+      fborm.signOutAccount(Firebase.firebaseMain).then(() => {
+        fborm
+          .signUpEmail(Firebase.firebaseMain, req)
+          .then(result => {
+            Firebase.firebaseMain = result.firebase;
+            let userId = fborm.currentUser(Firebase.firebaseMain).uid;
+            res.send("Success");
+          })
+          .catch(result => {
+            res.status(result.statusCode).send(result.errorCode);
+          });
       });
+    } else {
+      fborm
+        .signUpEmail(Firebase.firebaseMain, req)
+        .then(result => {
+          Firebase.firebaseMain = result.firebase;
+          let userId = fborm.currentUser(Firebase.firebaseMain).uid;
+          res.send("Success");
+        })
+        .catch(result => {
+          res.status(result.statusCode).send(result.errorCode);
+        });
+    }
   });
 };
