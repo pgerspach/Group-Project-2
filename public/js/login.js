@@ -5,7 +5,9 @@ let docReadyPromise = new Promise((resolve, reject) => {
         console.log("Response from google sign in" + response);
 
         if (response === "Success") {
-          sendHome();
+          $(".g-signin2").click(() => {
+            sendHome();
+          });
         }
       });
       $("#logButt").click(event => {
