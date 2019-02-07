@@ -14,11 +14,23 @@ html, body, #main-container {
 
 }
 
-#signupButt .g-signin2 {
+#signupButt {
 
   padding-top: 5px;
-  justify-content: center;
   
+}
+
+#googButt {
+
+  margin-top: 20px;
+  margin-left:75px;
+
+}
+
+#forGot {
+
+  margin-top: 20px;
+
 }
 
 /* home page */
