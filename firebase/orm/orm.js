@@ -92,8 +92,29 @@ module.exports = {
         lastName:userInfo.lastName,
         proPic:userInfo.proPic,
         coverPic:userInfo.coverPic
-      }).then(()=>{
-        resolve();
+      }).then((newUser)=>{
+        db.users.findAll({where:{
+          id:{
+            [db.Sequelize.Op.ne]:newUser.id
+          }
+        }}).then(data=>{
+          makeFriends(data);
+          function makeFriends(data){
+            db.friendships.create({
+              uuid_1:newUser.id,
+              uuid_2:data[data.length-1].id,
+              status:2
+            }).then(result=>{
+              data.pop();
+              if(data.length>0){
+                makeFriends(data);
+              }else{
+                resolve();
+                return;
+              }
+            })
+          }
+        })
       })
     })
   }
