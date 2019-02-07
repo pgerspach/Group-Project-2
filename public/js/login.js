@@ -10,7 +10,7 @@ let docReadyPromise = new Promise((resolve, reject) => {
           });
         }
       });
-      $("#logButt").click(event => {
+      $("#signupButt").click(event => {
         event.preventDefault();
         $.post(
           "/auth/email",
@@ -21,14 +21,28 @@ let docReadyPromise = new Promise((resolve, reject) => {
           response => {
             console.log("Response from email sign in: " + response);
             if (response === "Success") {
-              $(".g-signin2").click(() => {
-                sendHome();
-              });
+              sendHome();
+              $("#login-email").val("");
+              $("#login-password").val("");
+            } else if (response === "Create user") {
+              $.post(
+                "/auth/email/create",
+                {
+                  email: $("#login-email").val(),
+                  password: $("#login-password").val()
+                },
+                response => {
+                  console.log("Response from email sign in: " + response);
+                  if (response === "Success") {
+                    sendHome();
+                    $("#login-email").val("");
+                    $("#login-password").val("");
+                  }
+                }
+              );
             }
           }
         );
-        $("#login-email").val("");
-        $("#login-password").val("");
       });
     });
   });
