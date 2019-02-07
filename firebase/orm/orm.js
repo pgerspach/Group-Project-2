@@ -74,6 +74,7 @@ module.exports = {
           });
         })
         .catch(function(error) {
+          console.log(error.code);
           reject({
             statusCode: 404,
             errorCode: error.code
