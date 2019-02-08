@@ -17,6 +17,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                <div id="signoutButt">
+                <button type="button" class="btn btn-outline-warning">Sign Out</button>
+                </div>
+                
             </ul>
         </div>
     </nav>
@@ -69,8 +73,8 @@
     <div id="activiFeed">
         <div class="list-group">
             {{#each efforts}}
-            <a class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between" id="listItem">
+            <a class="list-group-item list-group-item-action" id="listItem">
+                <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1" id="activiTitle">{{header}}</h5>
                     <small>3 days ago</small>
                 </div>
