@@ -14,6 +14,13 @@ html, body, #main-container {
 
 }
 
+#signupButt {
+
+  padding-top: 5px;
+  justify-content: center;
+  
+}
+
 /* home page */
 
 #searchBar {
