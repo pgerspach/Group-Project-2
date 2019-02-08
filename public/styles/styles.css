@@ -14,6 +14,12 @@ html, body, #main-container {
 
 }
 
+#avaTar {
+
+  margin-top: 5px;
+  
+}
+
 #registerButt {
 
   padding-top: 5px;
@@ -30,6 +36,7 @@ html, body, #main-container {
 #forGot {
 
   margin-top: 20px;
+  margin-bottom: 20px;
 
 }
 
