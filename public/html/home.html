@@ -5,7 +5,9 @@
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-    <link rel="stylesheet" href="/public/styles/styles.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
@@ -37,6 +39,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
+                    <div id="signoutButt">
+                        <button type="button" class="btn btn-outline-warning">Sign Out</button>
+                        </div>
                 </ul>
             </div>
         </nav>
@@ -81,15 +86,19 @@
 
         <div id ="activiFeed">
             <div class="list-group">
-                <a class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between" id="listItem">
-                        <h5 class="mb-1" id="activiTitle">Activity Title</h5>
+                <a class="list-group-item list-group-item-action" id="listItem">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><span id="userPost">John Smith</span><span id="activiTitle">Uwell</span></h5>
                         <small>3 days ago</small>
                     </div>
                     <p class="mb-1">Worked on group project.Worked on group project.Worked on group project.Worked on group project.</p>
+                    <div id="likeSect">
+                        <i class="far fa-thumbs-up"></i>
+                        <span id="numLikes"># of likes</span>
+                    </div>
                 </a>
 
-                <a class="list-group-item list-group-item-action">
+                <a class="list-group-item list-group-item-action" id="listItem">
                     <div class="d-flex w-100 justify-content-between" id="listItem">
                         <h5 class="mb-1" id="activiTitle">Activity Title</h5>
                         <small>5 days ago</small>

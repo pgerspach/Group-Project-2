@@ -14,11 +14,23 @@ html, body, #main-container {
 
 }
 
-#signupButt {
+#registerButt {
 
   padding-top: 5px;
-  justify-content: center;
   
+}
+
+#googButt {
+
+  margin-top: 20px;
+  margin-left:75px;
+
+}
+
+#forGot {
+
+  margin-top: 20px;
+
 }
 
 /* home page */
@@ -48,9 +60,15 @@ html, body, #main-container {
   
 }
 
-#activiFeed :hover{
+#listItem {
 
-  background-color: slategrey;
+  margin-top: 20px;
+
+}
+
+.list-group-item {
+
+  background-color: #c8d6e5;
 
 }
 
