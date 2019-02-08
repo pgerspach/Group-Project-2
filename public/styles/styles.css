@@ -60,3 +60,25 @@ html, body, #main-container {
   padding-left: 135px;
 
 }
+
+#profilePhoto {
+  width: 100%;
+  height: 100%;
+
+  margin: 10px;
+
+  border: lightblue solid;
+}
+
+#bioText {
+  margin: 10px;
+  color: navy;
+}
+
+#addFriendButton {
+  margin: 10px;
+
+  /* toggle visibility based on whether addFriend option is available*/
+  
+  /* visibility: hidden; */
+}
