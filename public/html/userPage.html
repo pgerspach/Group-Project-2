@@ -5,38 +5,72 @@
     <title>Page Title</title>
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="./styles/styles.css">
+
+    <!--link from perspective of html page; use for testing-->
+    <link rel="stylesheet" href="../styles/styles.css">
+
+    <!--link from perspective of handlebars file; activate this link-->
+    <!-- <link rel="stylesheet" href="/public/styles/styles.css"> -->
     
+    <!--just for testing-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
+
+    <title>My Page</title>
 </head>
 <body>
 
     <div class="container">
 
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nbar">
-                    
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav m-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>        
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nbar">
+                
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>        
 
         <div class="row">
+
+            <div class="col-md-3">
+                <img id="profilePhoto" src="http://lorempixel.com/output/abstract-q-c-350-250-1.jpg" alt="The is the alt text">
+            
+            </div>
+
+            <div class="col-md-9">
+                <div class="row">
+                    <button id="addFriendButton" type="button" class="btn btn-success">Add Friend</button>
+                </div>
+
+                <div class="row">
+                    <p id="bioText">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus totam fugit maiores quae corporis, quis obcaecati et, voluptatum nobis quidem commodi minima placeat praesentium vel minus nesciunt natus consectetur aut.</p>
+                </div>                
+
+            </div>
+
+        </div>
+
+        <!--put the usual activity feed below-->
+
+        <!-- <div class="row">
             <div class="item card text-white bg-primary mb-3" style="max-width: 18rem;">
                 <div class="card-header">I did something to enrich my life!</div>
                 <div class="card-body">
-                    <!-- <h5 class="card-title">Primary card title</h5> -->
+                    
                     <p class="card-text">Here's some more text to describe what I did to enrich my life! I can elaborate on what I did. This will have a greater character limit than the Headline.</p>
                 </div>
             </div>        
@@ -57,9 +91,17 @@
                 </div>
             </div>                
 
-        </div>
+        </div> -->
 
     </div>
+
+
+    <!-- <script type="text/javascript">
+        $("#addFriendButton").on("click", function() {
+            console.log("The button is clicked.");
+        })
+        
+    </script> -->
     
 </body>
 </html>
