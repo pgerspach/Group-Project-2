@@ -1,30 +1,27 @@
+let initSignOut = false;
+
 let docReadyPromise = new Promise((resolve, reject) => {
   $(document).ready(() => {
+    $("#signInIfData").click(event => {
+      event.preventDefault();
+      console.log("Hello!");
+      if ($("#login-email").val() !== "" && $("#login-password").val() !== "") {
+        signInEmail();
+      }
+    });
+    $("#signUpButt").click(event => {
+      event.preventDefault();
+      signUpEmail();
+    });
     resolve(token => {
       $.post("/auth/google", { token: token }, response => {
         console.log("Response from google sign in" + response);
 
         if (response === "Success") {
-          $(".g-signin2").click(() => {
-            sendHome();
-          });
-        }else{
-          alert(response+" Something went wrong. Try again");
+          sendHome();
+        } else {
+          alert(response + " Something went wrong. Try again");
         }
-      });
-      $("#signInIfData").click(event => {
-        event.preventDefault();
-        if (
-          $("#login-email").val() !== "" &&
-          $("#login-password").val() !== ""
-        ) {
-          signInEmail();
-        }
-      });
-
-      $("#signUpButt").click(event => {
-        event.preventDefault();
-        signUpEmail();
       });
     });
   });
@@ -32,12 +29,17 @@ let docReadyPromise = new Promise((resolve, reject) => {
 
 function onSignIn(googleUser) {
   let token = googleUser.getAuthResponse().id_token;
-
-  // signIn(token);
+  if (!initSignOut) {
+    gapi.auth2.getAuthInstance().disconnect();
+    initSignOut = true;
+  }
+  $("#google_token").val(token); //hidden form value
+  $("#google-oauth").submit(); //hidden form
   docReadyPromise.then(signIn => {
     signIn(token);
   });
 }
+
 function sendHome() {
   window.location.href = "/home";
 }
@@ -55,9 +57,8 @@ function signInEmail() {
         sendHome();
         $("#login-email").val("");
         $("#login-password").val("");
-      }else{
-        alert(response+" Something went wrong. Try again");
- 
+      } else {
+        alert(response + " Something went wrong. Try again");
       }
     }
   );
@@ -80,8 +81,8 @@ function signUpEmail() {
         $("#signupLname").val("");
         $("#signup-email").val("");
         $("#signup-password").val("");
-      }else{
-        alert(response+" Something went wrong. Try again");
+      } else {
+        alert(response + " Something went wrong. Try again");
       }
     }
   );
