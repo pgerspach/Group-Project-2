@@ -12,6 +12,9 @@ module.exports = function(sequelize, DataTypes) {
       },
       coverPic:{
         type:DataTypes.STRING
+      },
+      bio:{
+        type:DataTypes.TEXT
       }
     });
     users.associate = function(models) {

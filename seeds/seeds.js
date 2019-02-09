@@ -1,8 +1,8 @@
 const faker = require("faker");
 const db = require("../models");
 
-const numUsers = 20;
-const numEfforts = 5;
+const numUsers = 10;
+const numEfforts = 3;
 const effortsCategories = [
   "Body",
   "Charity",
@@ -23,13 +23,14 @@ module.exports = function() {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         proPic: faker.image.imageUrl(300, 300),
-        coverPic: faker.image.imageUrl(800, 400)
+        coverPic: faker.image.imageUrl(800, 400),
+        bio:faker.lorem.paragraph(3)
       })
       .then(() => {
         if (numLeft - 1 === 0) {
           db.users
             .findAll({
-              attributes: ["id"]
+              attributes: ["id", "firstName", "lastName"]
             })
             .then(data => {
               createEfforts(data, numUsers, numEfforts);
@@ -42,9 +43,11 @@ module.exports = function() {
   }
 
   function createEfforts(data, numUsersLeft, numEffortsLeft) {
+    console.log(data[0]);
     db.efforts
       .create({
         userId: data[numUsersLeft - 1].id,
+        name:data[numUsersLeft - 1].firstName +" "+ data[numUsersLeft - 1].lastName,
         header: faker.lorem.sentence(),
         description: faker.lorem.sentence(),
         supports: faker.random.number(0, 15),
