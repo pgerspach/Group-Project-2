@@ -31,7 +31,15 @@
 
         <div class="col-md-9">
             <div class="row">
-                <button id="addFriendButton" type="button" class="btn btn-success">Add Friend</button>
+                <div class="col-2">
+                    <button id="addFriendButton" type="button" class="btn btn-success">Add Friend</button>
+                </div>
+                <div class="col-8">
+
+                </div>
+                <div class="col-2">
+                    <button id="editProfileButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
+                </div>
             </div>
 
             <div class="row">
@@ -41,6 +49,51 @@
         </div>
 
     </div>
+
+
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+<!--value attributes in the edit profile form should be user's current values-->
+                    <form id="editProfileForm">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">UserName</label>
+                            <input class="form-control" id="userNameInput" maxlength="30"
+                                placeholder="" value="this is what's currently in there">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Link to Photo</label>
+                            <input class="form-control" id="profilePhotoInput" value="put the current link here">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">Bio</label>
+                            <textarea class="form-control" id="bioInput" rows="5" maxlength="500"
+                                placeholder="Tell us about yourself!">{{bio}}</textarea>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button id="cancelProfileChanges" type="submit" class="btn btn-secondary">Cancel</button>
+                            <button id="saveProfile" type="submit" class="btn btn-primary">Save Profile</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <div id="activiFeed">
         <div class="list-group">
@@ -54,9 +107,8 @@
             </a>
             {{/each}}
         </div>
-
-
     </div>
+
 
 </div>
 
