@@ -28,7 +28,6 @@ app.use(session({
   saveUninitialized: false,
   cookie: { expires: oneDay }
 }));
-
 //Firebase
 const Firebase = require("./firebase/firebase.js");
 
