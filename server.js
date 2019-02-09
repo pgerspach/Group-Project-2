@@ -1,6 +1,7 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
+const session = require('express-session');
 
 var db = require("./models");
 
@@ -20,6 +21,14 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 app.use(express.static("public"));
+const oneDay = 60000 * 60 * 24;
+app.use(session({
+  key: 'user_sid',
+  secret: 'anything',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { expires: oneDay }
+}));
 
 //Firebase
 const Firebase = require("./firebase/firebase.js");
