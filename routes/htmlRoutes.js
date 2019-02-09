@@ -23,20 +23,22 @@ module.exports = function(app, Firebase) {
   });
 
   app.post("/search", (req, res) => {
-    console.log("keyword: "+req.body.keyword)
+    console.log("keyword: " + req.body.keyword);
     if (req.body.keyword === "Search user") {
-      db.users.findAll({
-        where:{
-          firstName:req.body.city.split(" ")[0].trim(),
-          lastName: req.body.city.split(" ")[1].trim()
-        }
-      }).then((result)=>{
-        if(result.length>0){
-          fetchUserData(result[0].id, res);
-        }else{
-          res.sendStatus(404);
-        }
-      })
+      db.users
+        .findAll({
+          where: {
+            firstName: req.body.city.split(" ")[0].trim(),
+            lastName: req.body.city.split(" ")[1].trim()
+          }
+        })
+        .then(result => {
+          if (result.length > 0) {
+            fetchUserData(result[0].id, res);
+          } else {
+            res.sendStatus(404);
+          }
+        });
     } else {
       req.body.city = req.body.city.replace(/ /g, "+");
       axios
@@ -121,7 +123,8 @@ module.exports = function(app, Firebase) {
             .findAll({
               where: {
                 $or: friends
-              }
+              },
+              order: [["updatedAt", "DESC"]]
             })
             .then(data => {
               //console.log('efffortsssssss', data.map(e => console.log('eachhhhhh efffff', e.category)))
@@ -157,9 +160,9 @@ module.exports = function(app, Firebase) {
             console.log(userData);
             res.render("profile", {
               efforts: data,
-              proPic: fborm.currentUser(Firebase.firebaseMain).photoURL,
+              proPic: userData[0].proPic,
               bio: userData[0].bio,
-              userName: userData[0].firstName + " "+userData[0].lastName
+              userName: userData[0].firstName + " " + userData[0].lastName
             });
           })
           .catch(err => {

@@ -145,6 +145,7 @@ module.exports = {
                         })
                         .then(result => {
                           data.pop();
+                          data.pop();
                           if (data.length > 0) {
                             makeFriends(data);
                           } else {

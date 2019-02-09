@@ -2,6 +2,7 @@ module.exports = function(sequelize, DataTypes) {
 
   const efforts = sequelize.define("efforts", {
     header:DataTypes.STRING,
+    name:DataTypes.STRING,
     description: DataTypes.STRING,
     eventURL:{
       type: DataTypes.STRING,
