@@ -128,7 +128,8 @@ module.exports = function(app, Firebase) {
               req.session.efforts = data;
               res.render("home", {
                 efforts: data,
-                proPic: fborm.currentUser(Firebase.firebaseMain).photoURL
+                proPic: fborm.currentUser(Firebase.firebaseMain).photoURL,
+                user: fborm.currentUser(Firebase.firebaseMain).displayName
               });
             })
             .catch(err => {
