@@ -6,7 +6,6 @@ const session = require('express-session');
 var db = require("./models");
 
 var app = express();
-var PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
@@ -45,6 +44,8 @@ var syncOptions = { force: true };
 if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
+var PORT = process.env.PORT || 3000;
+
 
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function() {
