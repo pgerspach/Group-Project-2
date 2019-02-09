@@ -18,16 +18,26 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <div id="signoutButt">
-                <button type="button" class="btn btn-outline-warning">Sign Out</button>
+                    <button type="button" class="btn btn-outline-warning">Sign Out</button>
                 </div>
-                
+
             </ul>
         </div>
     </nav>
 
-    <div id ="searchBar">
-        <form class="form-inline my-2 my-lg-0" id="searchBar">
-            <input class="form-control mr-sm-2" type="search"  aria-label="Search">
+    <div id="searchBar">
+        <form class="form-inline my-2 my-lg-0" action="/search" method="POST" id="searchBar">
+            <select placeholder="Search keyword..." class="form-control mr-sm-2" name="keyword" aria-label="Search"
+                name="city">
+                <option value="body">Body</option>
+                <option value="charity">Charity</option>
+                <option value="culture">Culture</option>
+                <option value="education">Education</option>
+                <option value="friendship">Friendship</option>
+                <option value="spirit">Spirit</option>
+                <option value="volunteering">Volunteering</option>
+            </select>
+            <input placeholder="Location..." class="form-control mr-sm-2" name="city" aria-label="Search">
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" id="searchButt">Search</button>
         </form>
     </div>
@@ -35,74 +45,77 @@
 
 
     <div id="addFeed">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter" id="addfeedButt">Add Effort
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"
+            id="addfeedButt">Add Effort
         </button>
 
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Effort</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Effort</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
-        <form id="newPostForm">
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Headline (max 70 characters)</label>
-                <input class="form-control" id="headlineInput" maxlength="70" placeholder="Tell us what you did!">
-            </div>
-
-
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Description (max 280 characters)</label>
-                <textarea class="form-control" id="descriptionInput" rows="3" maxlength="280" placeholder="Tell us some more!"></textarea>
-            </div>        
+                        <form id="newPostForm">
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Headline (max 70 characters)</label>
+                                <input class="form-control" id="headlineInput" maxlength="70"
+                                    placeholder="Tell us what you did!">
+                            </div>
 
 
-            <div class="form-group">
-                <label for="exampleFormControlSelect2">Categories (select one or more)</label>
-                <select multiple class="form-control" id="categoriesInput">
-                    <option>Body</option>
-                    <option>Charity</option>
-                    <option>Culture</option>
-                    <option>Education</option>
-                    <option>Friendship</option>
-                    <option>Spirit</option>
-                    <option>Volunteering</option>
-                </select>
-            </div>
-
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>  
-
-        </form>
-
-    </div>
-    </div>
-</div>
-</div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Description (max 280 characters)</label>
+                                <textarea class="form-control" id="descriptionInput" rows="3" maxlength="280"
+                                    placeholder="Tell us some more!"></textarea>
+                            </div>
 
 
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Categories (select one or more)</label>
+                                <select multiple class="form-control" id="categoriesInput">
+                                    <option>Body</option>
+                                    <option>Charity</option>
+                                    <option>Culture</option>
+                                    <option>Education</option>
+                                    <option>Friendship</option>
+                                    <option>Spirit</option>
+                                    <option>Volunteering</option>
+                                </select>
+                            </div>
 
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
 
-    <div id="activiFeed">
-        <div class="list-group">
-            {{#each efforts}}
-            <a class="list-group-item list-group-item-action" id="listItem">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1" id="activiTitle">{{header}}</h5>
-                    <small>3 days ago</small>
+                        </form>
+
+                    </div>
                 </div>
-                <p class="mb-1">{{description}}</p>
-            </a>
-            {{/each}}
+            </div>
         </div>
 
 
-    </div>
 
+
+        <div id="activiFeed">
+            <div class="list-group">
+                {{#each efforts}}
+                <a class="list-group-item list-group-item-action" id="listItem">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1" id="activiTitle">{{header}}</h5>
+                        <small>3 days ago</small>
+                    </div>
+                    <p class="mb-1">{{description}}</p>
+                </a>
+                {{/each}}
+            </div>
+
+
+        </div>
