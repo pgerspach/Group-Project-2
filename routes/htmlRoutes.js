@@ -154,10 +154,12 @@ module.exports = function(app, Firebase) {
             }
           })
           .then(data => {
+            console.log(userData);
             res.render("profile", {
               efforts: data,
               proPic: fborm.currentUser(Firebase.firebaseMain).photoURL,
-              bio: userData.bio
+              bio: userData[0].bio,
+              userName: userData[0].firstName + " "+userData[0].lastName
             });
           })
           .catch(err => {
