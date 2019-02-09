@@ -58,6 +58,13 @@ html, body, #main-container {
 
 }
 
+#signedIn {
+
+  display: inline-block;
+  margin-left: 275px;
+
+}
+
 #activiFeed {
 
   display: flex;
