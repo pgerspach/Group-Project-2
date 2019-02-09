@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-8">
                     <!--username should go here-->
-                    <button id="nameButton" type="button" class="btn btn-secondary btn-lg" disabled><span id="userNameDisplay">FirstName LastName</span></button>
+                    <button id="nameButton" type="button" class="btn btn-secondary btn-lg" disabled><span id="userNameDisplay">{{userName}}</span></button>
                 </div>
                 <div class="col-2">
                     <button id="editProfileButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
@@ -70,12 +70,12 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">UserName</label>
                             <input class="form-control" id="userNameInput" maxlength="30"
-                                placeholder="" value="this is what's currently in there">
+                                placeholder="">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Link to Photo</label>
-                            <input class="form-control" id="profilePhotoInput" value="put the current link here">
+                            <input class="form-control" id="profilePhotoInput">
                         </div>
 
                         <div class="form-group">
