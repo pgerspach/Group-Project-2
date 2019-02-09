@@ -20,7 +20,7 @@ module.exports = function() {
     db.users
       .create({
         id: faker.random.alphaNumeric(28),
-        firstName: faker.name.findName(),
+        firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         proPic: faker.image.imageUrl(300, 300),
         coverPic: faker.image.imageUrl(800, 400)
