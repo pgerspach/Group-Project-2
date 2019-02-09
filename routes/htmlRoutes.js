@@ -25,18 +25,24 @@ module.exports = function(app, Firebase) {
   app.post("/search", (req, res) => {
     console.log("keyword: " + req.body.keyword);
     if (req.body.keyword === "Search user") {
+      let first = req.body.city.split(" ")[0].trim();
+      let last = req.body.city.split(" ")[1]||null;
+      if(last!==null){
+        last = last.trim()
+      }
+
       db.users
         .findAll({
           where: {
-            firstName: req.body.city.split(" ")[0].trim(),
-            lastName: req.body.city.split(" ")[1].trim()
+            firstName: first,
+            lastName: last
           }
         })
         .then(result => {
           if (result.length > 0) {
             fetchUserData(result[0].id, res);
           } else {
-            res.sendStatus(404);
+            res.render('404');
           }
         });
     } else {
