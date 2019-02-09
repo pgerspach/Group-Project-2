@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="/home">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
@@ -17,7 +17,7 @@
             </ul>
         </div>
     </nav>
-    
+
 
     <div id="main-modal">
         <div class="modal-dialog text-center">
@@ -38,57 +38,63 @@
                                 <input id="login-password" type="password" class="form-control" placeholder="Password">
                             </div>
                             <div id="registerButt">
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Register
-</button>
+                                <!-- Button trigger modal -->
+                                <button type="button" id="signInIfData" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalCenter">
+                                    Register
+                                </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Register - uWell</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-                <div class="row">
-                  <div class="col">
-                    <input type="text" class="form-control" placeholder="First name">
-                  </div>
-                  <div class="col">
-                    <input type="text" class="form-control" placeholder="Last name">
-                  </div>
-                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Register - uWell</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input id="signupFname" type="text" class="form-control"
+                                                                placeholder="First name">
+                                                        </div>
+                                                        <div class="col">
+                                                            <input id="signupLname" type="text" class="form-control"
+                                                                placeholder="Last name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1"></label>
+                                                        <input type="email" class="form-control" aria-describedby="emailHelp"
+                                                            placeholder="Enter email" id="signup-email">
+                                                            <br>
+                                                        <input type="password" class="form-control" aria-describedby="emailHelp"
+                                                            placeholder="Password" id="signup-password">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel</button>
+                                                <button type="button" id="signUpButt" class="btn btn-outline-success">Sign
+                                                    Up</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <div class="form-group">
-                    <label for="exampleInputEmail1"></label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                  </div>
-              </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-outline-success">Sign Up</button>
-      </div>
-    </div>
-  </div>
-</div>
-                            
-
-                            
-                            <div id="googButt">
-                                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                <div id="googButt">
+                                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
                                 </div>
                         </form>
                     </div>
                     <div id="forGot">
-                    <div class="col-12 link-part">
-                        <a href="#">Forgot Password?</a>
-                    </div>
+                        <div class="col-12 link-part">
+                            <a href="#">Forgot Password?</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -96,6 +102,6 @@
     </div>
 
 
-    
+
 
 </div>

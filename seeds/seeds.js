@@ -3,7 +3,15 @@ const db = require("../models");
 
 const numUsers = 20;
 const numEfforts = 5;
-const effortsCategories = [];
+const effortsCategories = [
+  "Body",
+  "Charity",
+  "Culture",
+  "Education",
+  "Friendship",
+  "Spirit",
+  "Volunteering"
+];
 
 module.exports = function() {
   createUsers(numUsers);
@@ -12,7 +20,7 @@ module.exports = function() {
     db.users
       .create({
         id: faker.random.alphaNumeric(28),
-        firstName: faker.name.findName(),
+        firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         proPic: faker.image.imageUrl(300, 300),
         coverPic: faker.image.imageUrl(800, 400)
@@ -40,7 +48,7 @@ module.exports = function() {
         header: faker.lorem.sentence(),
         description: faker.lorem.sentence(),
         supports: faker.random.number(0, 15),
-        category: "General Wellness"
+        category: effortsCategories[Math.floor(Math.random()*7)]
       })
       .then(() => {
         if (numUsersLeft - 1 === 0) {

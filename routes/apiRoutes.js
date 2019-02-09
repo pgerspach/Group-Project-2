@@ -1,23 +1,20 @@
-var db = require("../models");
+const db = require("../models");
+
 module.exports = function(app, Firebase) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
-
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
+  app.post("/efforts/create", (req,res)=>{
+    console.log("here")
+    db.efforts.create({
+      userId:Firebase.firebaseMain.auth().currentUser.uid,
+      header:req.body.header,
+      description:req.body.description,
+      eventURL:null||req.body.eventURL,
+      supports:0,
+      category:req.body.category
+    }).then(()=>{
+      res.send("Success");
+    }).catch((err)=>{
+      console.log(err);
+      res.send(err.errorCode);
+    })
+  })
 };
