@@ -1,5 +1,3 @@
-const models = require("../models");
-
 module.exports = function(sequelize, DataTypes) {
   var friendships = sequelize.define("friendships", {
     uuid_1: {
