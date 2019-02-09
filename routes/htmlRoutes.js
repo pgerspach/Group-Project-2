@@ -5,6 +5,9 @@ module.exports = function(app, Firebase) {
   app.get("/", function(req, res) {
     res.render("login");
   });
+  app.get("/login", function(req, res) {
+    res.render("login");
+  });
   app.get("/home", function(req, res) {
     fetchHomeData(req, res);
   });

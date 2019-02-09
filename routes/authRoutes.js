@@ -11,56 +11,33 @@ module.exports = function(app, Firebase) {
       console.log("User Not");
     }
   });
-
+  app.post("/signout", (req,res)=>{
+    fborm.signOutAccount(Firebase.firebaseMain).then((result)=>{
+      res.send("Success");
+    })
+  })
   app.post("/auth/google", (req, res) => {
     console.log("Here in auth/google post request");
     fborm
       .signInGoogle(Firebase.firebaseMain, req.body.token)
       .then(result => {
-        Firebase.firebaseMain = result.firebase;
-        let userId = fborm.currentUser(Firebase.firebaseMain).uid;
-        console.log(userId);
-
-        db.users
-          .findAll({
-            where: {
-              id: userId
-            }
-          })
-          .then(result => {
-            if (result.length < 1) {
-              console.log("user id: " + userId);
-              let userInfo = {
-                id: userId,
-                firstName: fborm
-                  .currentUser(Firebase.firebaseMain)
-                  .displayName.split(" ")[0],
-                lastName:
-                  fborm
-                    .currentUser(Firebase.firebaseMain)
-                    .displayName.split(" ")[1] || null,
-                proPic:
-                  fborm.currentUser(Firebase.firebaseMain).photoURL || null,
-                coverPic: null
-              };
-              fborm.addUserToMySQL(userInfo).then(() => {
-                console.log("here in successful addition to sql");
-                res.send("Success");
-              });
-            } else {
-              res.send("Success");
-            }
-          });
+        // Firebase.firebaseMain = result.firebase;
+        // let userId = fborm.currentUser(Firebase.firebaseMain).uid;
+        // console.log(userId);
+        fborm.addUserToMySQL(Firebase.firebaseMain).then((result) => {
+          console.log(result);
+          res.send("Success");
+        });
       })
       .catch(result => {
-        res.status(result.statusCode).send(result.errorCode);
+        res.send(result.errorCode);
       });
   });
 
   app.post("/auth/email", (req, res) => {
     console.log("Here in auth/email post request");
     //fborm.signInEmail(Firebase.firebaseMain)...
-    if (fborm.currentUser(Firebase.firebaseMain)) {
+    if (fborm.currentUser(Firebase.firebaseMain) !== null) {
       fborm.signOutAccount(Firebase.firebaseMain).then(() => {
         fborm
           .signInEmail(Firebase.firebaseMain, req)
@@ -73,7 +50,7 @@ module.exports = function(app, Firebase) {
             if (result.errorCode == "auth/user-not-found") {
               res.send("Create user");
             } else {
-              res.status(result.statusCode).send(result.errorCode);
+              res.send(result.errorCode);
             }
           });
       });
@@ -86,36 +63,39 @@ module.exports = function(app, Firebase) {
           res.send("Success");
         })
         .catch(result => {
-          res.status(result.statusCode).send(result.errorCode);
+          res.send(result.errorCode);
         });
     }
   });
 
   app.post("/auth/email/create", (req, res) => {
 
-    if (fborm.currentUser(Firebase.firebaseMain)) {
+    if (fborm.currentUser(Firebase.firebaseMain) !== null) {
       fborm.signOutAccount(Firebase.firebaseMain).then(() => {
         fborm
           .signUpEmail(Firebase.firebaseMain, req)
           .then(result => {
-            Firebase.firebaseMain = result.firebase;
-            let userId = fborm.currentUser(Firebase.firebaseMain).uid;
-            res.send("Success");
+            fborm.addUserToMySQL(Firebase.firebaseMain).then((result) => {
+              console.log(result);
+              res.send("Success");
+            });
           })
           .catch(result => {
-            res.status(result.statusCode).send(result.errorCode);
+            console.log("hello");
+            res.send(result.errorCode);
           });
       });
     } else {
       fborm
         .signUpEmail(Firebase.firebaseMain, req)
         .then(result => {
-          Firebase.firebaseMain = result.firebase;
-          let userId = fborm.currentUser(Firebase.firebaseMain).uid;
-          res.send("Success");
+          fborm.addUserToMySQL(Firebase.firebaseMain).then((result) => {
+            console.log(result);
+            res.send("Success");
+          });
         })
         .catch(result => {
-          res.status(result.statusCode).send(result.errorCode);
+          res.send(result.errorCode);
         });
     }
   });
