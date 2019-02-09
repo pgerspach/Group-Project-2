@@ -100,7 +100,7 @@ html, body, #main-container {
   color: navy;
 }
 
-#addFriendButton,  #editProfileButton {
+#addFriendButton {
   margin: 10px;
 
   /* toggle visibility based on whether addFriend option is available*/
