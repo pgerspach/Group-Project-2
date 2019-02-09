@@ -1,6 +1,6 @@
 var db = require("../models");
 var fborm = require("../firebase/orm/orm.js");
-const axios = require('axios');
+const axios = require("axios");
 
 module.exports = function(app, Firebase) {
   // Load index page
@@ -17,26 +17,35 @@ module.exports = function(app, Firebase) {
     fetchUserData(req, res);
   });
 
-  app.post('/search', (req, res) => {
+  app.post("/search", (req, res) => {
     req.body.city = req.body.city.replace(/ /g, "+");
-    console.log('res bodieeeeeeee', req.body);
-    axios.get(`http://www.eventbriteapi.com/v3/events/search/?q=${req.body.keyword}&location.address=${req.body.city}&token=${process.env.EVENTBRITE_OAUTH_TOKEN}`)
-    .then(resp => {
-      const events = resp.data.events.map(e => {
-        e.description.text = `${e.description && e.description.text && e.description.text.substring(0, 200)}...`;
-        return e;
+    console.log("res bodieeeeeeee", req.body);
+    axios
+      .get(
+        `http://www.eventbriteapi.com/v3/events/search/?q=${
+          req.body.keyword
+        }&location.address=${req.body.city}&token=${
+          process.env.EVENTBRITE_OAUTH_TOKEN
+        }`
+      )
+      .then(resp => {
+        const events = resp.data.events.map(e => {
+          e.description.text = `${e.description &&
+            e.description.text &&
+            e.description.text.substring(0, 200)}...`;
+          return e;
+        });
+        res.render("events", { events });
       })
-      res.render('events', {events});
-    }).catch(err => {
-      console.log('errrrrrrr', err)
-      res.send(err);
-    });
+      .catch(err => {
+        console.log("errrrrrrr", err);
+        res.send(err);
+      });
   });
 
-  app.get('/events', (req, res) => {
-    res.render('events');
+  app.get("/events", (req, res) => {
+    res.render("events");
   });
-
 
   // Load example page and pass in an example by id
   // app.get("/example/:id", function(req, res) {
@@ -114,18 +123,29 @@ module.exports = function(app, Firebase) {
       res.render("login");
     } else {
       let currentUserId = fborm.currentUser(Firebase.firebaseMain).uid;
-
-      db.efforts
+      db.users
         .findAll({
           where: {
-            usersId: currentUserId
+            id: currentUserId
           }
         })
-        .then(data => {
-          res.render("profile", {
-            efforts: data,
-            proPic: fborm.currentUser(Firebase.firebaseMain).photoURL
-          });
+        .then(userData => {
+          db.efforts
+            .findAll({
+              where: {
+                userId: currentUserId
+              }
+            })
+            .then(data => {
+              res.render("profile", {
+                efforts: data,
+                proPic: fborm.currentUser(Firebase.firebaseMain).photoURL,
+                bio:userData.bio
+              });
+            })
+            .catch(err => {
+              throw err;
+            });
         })
         .catch(err => {
           throw err;
