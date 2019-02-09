@@ -1,4 +1,4 @@
-html, body, {
+html, body {
 
   max-height: 100%;
   max-width: 100%;
@@ -15,8 +15,12 @@ html, body, {
 
 #main-container {
 
+ 
+  height: 200%;
+  /* max-height: 500%; */
   background-image: url(https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/238538/5000/3333/m1/fpnw/wm1/abstract-background-of-hexagonal-cells-gradient1-.jpg?1416235816&s=f079cf4fda00a7fa34b30650015b9177);
   background-size: cover;
+
 
 }
 
